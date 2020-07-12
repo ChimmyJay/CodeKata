@@ -7,7 +7,7 @@ namespace CodeKata
     {
         private const string InvalidString = "n/a";
 
-        private readonly Dictionary<string, int> _singleDigitLetters = new Dictionary<string, int>
+        private readonly Dictionary<string, int> _lowerCaseSingleDigitLetterLookup = new Dictionary<string, int>
         {
             {"zero", 0},
             {"one", 1},
@@ -36,13 +36,13 @@ namespace CodeKata
 
         private double CalculateAverage()
         {
-            var average = _letters.Average(x => _singleDigitLetters[x]);
+            var average = _letters.Average(x => _lowerCaseSingleDigitLetterLookup[x]);
             return average;
         }
 
         private string GetLetter(double average)
         {
-            return _singleDigitLetters.First(x => x.Value == (int) average).Key;
+            return _lowerCaseSingleDigitLetterLookup.First(x => x.Value == (int) average).Key;
         }
 
         private void GetLetters(string str)
@@ -52,7 +52,7 @@ namespace CodeKata
 
         private bool IsValid()
         {
-            return _letters.All(x => _singleDigitLetters.ContainsKey(x));
+            return _letters.All(x => _lowerCaseSingleDigitLetterLookup.ContainsKey(x));
         }
     }
 }
