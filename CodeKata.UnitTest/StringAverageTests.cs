@@ -59,11 +59,13 @@ namespace CodeKata.UnitTest
             OutputShouldBe(InvalidOutput);
         }
 
+        [TestCase("zero nine", "four")]
+        [TestCase(" zero nine ", "four")]
         [Test]
-        public void return_average_floored_letter_when_valid_input()
+        public void return_average_floored_letter_when_valid_input(string input, string expected)
         {
-            GivenInput("zero nine");
-            OutputShouldBe("four");
+            GivenInput(input);
+            OutputShouldBe(expected);
         }
 
         private void OutputShouldBe(string expected)

@@ -30,6 +30,7 @@ namespace CodeKata
                 return InvalidString;
             }
 
+            str = str.Trim();
             GetLetters(str);
             if (!IsValid())
             {
