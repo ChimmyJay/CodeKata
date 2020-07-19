@@ -25,6 +25,11 @@ namespace CodeKata
 
         public string AverageString(string str)
         {
+            if (string.IsNullOrEmpty(str))
+            {
+                return InvalidString;
+            }
+
             GetLetters(str);
             if (!IsValid())
             {

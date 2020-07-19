@@ -14,7 +14,6 @@ namespace CodeKata.UnitTest
             _stringAverager = new StringAverager();
         }
 
-
         [Test]
         public void return_na_when_invalid_input()
         {
@@ -23,11 +22,17 @@ namespace CodeKata.UnitTest
             OutputShouldBe(InvalidOutput);
         }
 
-
         [Test]
         public void invalid_input_when_input_is_empty()
         {
             GivenInput("");
+            OutputShouldBe(InvalidOutput);
+        }
+
+        [Test]
+        public void invalid_input_when_input_is_null()
+        {
+            GivenInput(null);
             OutputShouldBe(InvalidOutput);
         }
 
@@ -53,7 +58,6 @@ namespace CodeKata.UnitTest
             GivenInput(input);
             OutputShouldBe(InvalidOutput);
         }
-
 
         [Test]
         public void return_average_floored_letter_when_valid_input()
