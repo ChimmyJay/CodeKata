@@ -6,63 +6,7 @@ namespace CodeKata.UnitTest
     {
         private string _actual;
         private StringAverager _stringAverager;
-
-        private void GivenInput(string input)
-        {
-            _actual = _stringAverager.AverageString(input);
-        }
-
-        [Test]
-        public void input_invalid_when_input_is_empty()
-        {
-            GivenInput("");
-            Assert.IsFalse(IsValidInput());
-        }
-
-        [Test]
-        [TestCase("Zero")]
-        [TestCase("ZERO")]
-        public void input_invalid_when_letter_not_lower_case(string input)
-        {
-            GivenInput(input);
-            Assert.IsFalse(IsValidInput());
-        }
-
-        [Test]
-        public void input_invalid_when_letter_not_single_digit_number()
-        {
-            GivenInput("ten");
-            Assert.IsFalse(IsValidInput());
-        }
-
-        private bool IsValidInput()
-        {
-            return _actual != "n/a";
-        }
-
-        [Test]
-        public void output_is_floored_whole_number()
-        {
-            GivenInput("zero one");
-            OutputShouldBe("zero");
-        }
-
-        private void OutputShouldBe(string expected)
-        {
-            Assert.AreEqual(expected, _actual);
-        }
-
-        private void OutputShouldNotBe(string expected)
-        {
-            Assert.AreNotEqual(expected, _actual);
-        }
-
-        [Test]
-        public void return_average_letter_when_input_valid()
-        {
-            GivenInput("one two three");
-            OutputShouldBe("two");
-        }
+        private const string InvalidOutput = "n/a";
 
         [SetUp]
         public void Setup()
@@ -71,17 +15,67 @@ namespace CodeKata.UnitTest
         }
 
         [Test]
-        public void when_input_invalid_return_na()
+        public void return_na_when_invalid_input()
         {
+            Assert.AreEqual("n/a", InvalidOutput);
             GivenInput("invalid input");
-            OutputShouldBe("n/a");
+            OutputShouldBe(InvalidOutput);
         }
 
         [Test]
-        public void when_input_valid_return_not_na()
+        public void invalid_input_when_input_is_empty()
         {
-            GivenInput("zero one two three four five six seven eight nine");
-            OutputShouldNotBe("n/a");
+            GivenInput("");
+            OutputShouldBe(InvalidOutput);
+        }
+
+        [Test]
+        public void invalid_input_when_input_is_null()
+        {
+            GivenInput(null);
+            OutputShouldBe(InvalidOutput);
+        }
+
+        [Test]
+        public void invalid_input_when_input_contain_not_number_letter()
+        {
+            GivenInput("abc");
+            OutputShouldBe(InvalidOutput);
+        }
+
+        [Test]
+        public void invalid_input_when_letter_not_single_digit_number()
+        {
+            GivenInput("ten");
+            OutputShouldBe(InvalidOutput);
+        }
+
+        [Test]
+        [TestCase("Zero")]
+        [TestCase("ZERO")]
+        public void invalid_input_when_letter_not_lower_case(string input)
+        {
+            GivenInput(input);
+            OutputShouldBe(InvalidOutput);
+        }
+
+        [TestCase("zero nine", "four")]
+        [TestCase(" zero nine ", "four")]
+        [Test]
+        public void return_average_floored_letter_when_valid_input(string input, string expected)
+        {
+            GivenInput(input);
+            OutputShouldBe(expected);
+        }
+
+        private void OutputShouldBe(string expected)
+        {
+            Assert.AreEqual(expected, _actual);
+        }
+
+        private void GivenInput(string input)
+        {
+            _actual = _stringAverager.AverageString(input);
         }
     }
 }

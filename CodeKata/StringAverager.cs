@@ -21,38 +21,41 @@ namespace CodeKata
             {"nine", 9},
         };
 
-        private string[] _letters;
-
         public string AverageString(string str)
         {
-            GetLetters(str);
-            if (!IsValid())
+            if (string.IsNullOrEmpty(str))
             {
                 return InvalidString;
             }
 
-            return GetLetter(CalculateAverage());
+            str = str.Trim();
+            var letters = GetLetters(str);
+            return letters.All(IsValid)
+                ? GetLetter(GetFlooredAverage(letters))
+                : InvalidString;
         }
 
-        private double CalculateAverage()
+        private int GetFlooredAverage(IEnumerable<string> letters)
         {
-            var average = _letters.Average(x => _lowerCaseSingleDigitLetterLookup[x]);
-            return average;
+            var flooredAverage = (int) letters.Average(x => _lowerCaseSingleDigitLetterLookup[x]);
+            return flooredAverage;
         }
 
-        private string GetLetter(double average)
+        private string GetLetter(int flooredAverage)
         {
-            return _lowerCaseSingleDigitLetterLookup.First(x => x.Value == (int) average).Key;
+            var averageString = _lowerCaseSingleDigitLetterLookup.First(x => x.Value == flooredAverage).Key;
+            return averageString;
         }
 
-        private void GetLetters(string str)
+        private static string[] GetLetters(string str)
         {
-            _letters = str.Split(' ');
+            var letters = str.Split(' ');
+            return letters;
         }
 
-        private bool IsValid()
+        private bool IsValid(string letter)
         {
-            return _letters.All(x => _lowerCaseSingleDigitLetterLookup.ContainsKey(x));
+            return _lowerCaseSingleDigitLetterLookup.ContainsKey(letter);
         }
     }
 }
