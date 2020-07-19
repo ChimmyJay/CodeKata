@@ -73,11 +73,6 @@ namespace CodeKata.UnitTest
             Assert.AreEqual(expected, _actual);
         }
 
-        private void OutputShouldNotBe(string expected)
-        {
-            Assert.AreNotEqual(expected, _actual);
-        }
-
         private void GivenInput(string input)
         {
             _actual = _stringAverager.AverageString(input);
