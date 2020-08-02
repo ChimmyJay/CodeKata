@@ -2,15 +2,15 @@
 
 namespace CodeKata.UnitTest
 {
-    public class DeadAntsTests
+    public class DeadAntCounterTests
     {
-        private DeadAnts _deadAnts;
+        private DeadAntCounter _deadAntCounter;
         private int _deadAntCount;
 
         [SetUp]
         public void SetUp()
         {
-            _deadAnts = new DeadAnts();
+            _deadAntCounter = new DeadAntCounter();
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace CodeKata.UnitTest
 
         private void GivenAnts(string ants)
         {
-            _deadAntCount = _deadAnts.DeadAntCount(ants);
+            _deadAntCount = _deadAntCounter.CalculateDeadAnt(ants);
         }
     }
 }
