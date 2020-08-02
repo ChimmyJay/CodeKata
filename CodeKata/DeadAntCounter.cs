@@ -2,9 +2,9 @@
 
 namespace CodeKata
 {
-    public class DeadAnts
+    public class DeadAntCounter
     {
-        public int DeadAntCount(string ants)
+        public int CalculateDeadAnt(string ants)
         {
             if (string.IsNullOrEmpty(ants))
             {
