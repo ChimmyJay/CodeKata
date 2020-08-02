@@ -11,16 +11,32 @@ namespace CodeKata
                 return 0;
             }
 
-            return GetDeadAntCount(RemoveSurvivingAnts(ants));
+            var deadAnts = RemoveSurvivingAnts(ants);
+            return Max(HeadCount(deadAnts), BodyCount(deadAnts), AssCount(deadAnts));
         }
 
-        private static int GetDeadAntCount(string deadAnts)
+        private static int Max(int headCount, int bodyCount, int assCount)
+        {
+            var deadAntCount = new[] { headCount, bodyCount, assCount }.Max();
+            return deadAntCount;
+        }
+
+        private static int AssCount(string deadAnts)
+        {
+            var assCount = deadAnts.Count(x => x == 't');
+            return assCount;
+        }
+
+        private static int BodyCount(string deadAnts)
+        {
+            var bodyCount = deadAnts.Count(x => x == 'n');
+            return bodyCount;
+        }
+
+        private static int HeadCount(string deadAnts)
         {
             var headCount = deadAnts.Count(x => x == 'a');
-            var bodyCount = deadAnts.Count(x => x == 'n');
-            var assCount = deadAnts.Count(x => x == 't');
-            var deadAntCount = new[] {headCount, bodyCount, assCount}.Max();
-            return deadAntCount;
+            return headCount;
         }
 
         private static string RemoveSurvivingAnts(string ants)
